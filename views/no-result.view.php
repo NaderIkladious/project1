@@ -1,0 +1,1 @@
+ <p style="font-size = large"><?= "No results where found for '{$term}'"; ?></p>
