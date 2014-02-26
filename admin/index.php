@@ -1,7 +1,7 @@
 <?php
 
 require '../blog.php';
-
+session_start();
 $all = get('posts', $conn);
 $users = all_users($conn);
 

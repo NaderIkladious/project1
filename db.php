@@ -65,6 +65,13 @@ function user($id, $conn)
 	
 }
 
+function name($user, $conn)
+{
+	return query('SELECT name FROM users WHERE username = :user LIMIT 1',
+				 	$conn,
+				 	array('user' => $user))[0][0];
+}
+
 function comments($id, $conn)
 {
 	return query("SELECT subject, comments.body, comments.date, uid FROM posts INNER JOIN comments WHERE pid = :pid GROUP BY cid",
@@ -187,16 +194,29 @@ function new_post($data, $conn)
 function change_name($new, $id, $conn)
 {
 	try{
-		$result = $conn->prepare("UPDATE  users SET  username = :new WHERE user_id = :id");
+		$result = $conn->prepare("UPDATE  users SET  name = :new WHERE user_id = :id");
 		$result->bindParam('new', $new, PDO::PARAM_STR);
 		$result->bindParam('id', $id, PDO::PARAM_INT);
 		$result->execute();
-		$_SESSION['username'] = $new;
 	}catch(Exception $e) {
 		echo "Error: " .$e->getMessage();
 		die();
 	}
 }
+
+function change_pass($old, $first, $second, $conn)
+{
+	// try{
+		$result = $conn->prepare("UPDATE users SET password = :new WHERE username = :name");
+		$result->bindParam('new', $first, PDO::PARAM_STR);
+		$result->bindParam('name', $_SESSION['username'], PDO::PARAM_STR);
+		$result->execute();
+	// }catch(Exception $e) {
+	// 	echo "Error: " .$e->getMessage();
+	// 	die();
+	// }
+}
+
 function bio($id, $conn)
 {
 	return query("SELECT bio FROM users WHERE user_id = :id",

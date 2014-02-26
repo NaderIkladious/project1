@@ -24,6 +24,22 @@ if( isset($_POST['bioSave'])) {
 	change_bio($_POST['bio'], $_GET['id'], $conn);
 }
 
+if( isset($_POST['chgPass'])) {
+	if(empty($_POST['old']) || empty($_POST['first']) || empty($_POST['second'])){
+		$pwd = "all fields are required!";
+	} else {
+		if(valid($_SESSION['username'], $_POST['old'], $conn)){
+			if($_POST['first'] === $_POST['second']){
+				change_pass($_POST['old'], $_POST['first'], $_POST['second'], $conn);
+			}else {
+				$pwd = "New Password don't match!";
+			}
+		}else {
+			$pwd = "Wrong Old Password!";
+		}
+	}
+}
+
 $posts = user_posts($_GET['id'], $conn);
 
 

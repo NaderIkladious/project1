@@ -12,7 +12,7 @@
 		<tr <?php if($i % 2 == 0) { echo 'class="eventr"';} ?>>
 			<td><?=$i;?></td>
 			<td><?= $one['username']; ?></td>
-			<td>Name</td>
+			<td><?= name(user($one['user_id'], $conn), $conn);?></td>
 			<td>
 				<form method="POST">
 					<input style="display:none" name="userId" value="<?= $one['user_id'];?>">				

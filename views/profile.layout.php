@@ -17,17 +17,6 @@
 
 	</div>
 
-
-	<div class="name">
-			<?php if($mine){ ?>
-				<form action="" method="POST">
-					<input style="width:200px;" class="prof-name" type="text" name="name" value="<?=htmlspecialchars(user($_GET['id'], $conn)); ?>">
-				</form>	
-			<?php }else { ?>
-				<label style="width:200px;" class="prof-name"><?=htmlspecialchars(user($_GET['id'], $conn)); ?></label>
-			<?php } ?>
-	</div>
-	
 	<div class="biog">
 			<?php if($mine){ ?>
 				<form method="POST">
@@ -40,9 +29,36 @@
 				<p class="bio"><?= htmlspecialchars(bio($_GET['id'], $conn)); ?></p>
 			<?php } ?>
 	</div>
+
+	<div class="name">
+			<?php if($mine){ ?>
+				<form action="" method="POST">
+					<input style="width:200px;" class="prof-name" type="text" name="name" value="<?=htmlspecialchars(name(user($_GET['id'], $conn),$conn)); ?>">
+				</form>	
+			<?php }else { ?>
+				<label style="width:200px;" class="prof-name"><?=htmlspecialchars(name(user($_GET['id'], $conn),$conn)); ?></label>
+			<?php } ?>
+	</div>
+
+	
 	<div class="container">
 		<?php include 'index.view.php'; ?>
 	</div>
 	
+<?php if($mine) : ?>
+	<div class="pass">
+		<p>Change Password</p>
+	<?php if(isset($pwd)): ?>
+		<span class="notice" style="padding-left:25px;" style="float:left;"><?=$pwd; ?></span>
+	<?php endif ; ?>
+		<form action="" method="POST">
+			<input class="pass-put" type="password" name="old" placeholder="Old Password">
+			<input class="pass-put" type="password" name="first" placeholder="New Password">
+			<input class="pass-put" type="password" name="second" placeholder="Verify Password">
+			<input class="post-it change-p" type="submit" value="Change" name="chgPass">
+		</form>	
+	</div>
+<?php endif; ?>
+
 </body>
 </html>
