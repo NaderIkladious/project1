@@ -306,3 +306,10 @@ function is_admin($user, $conn)
 					$conn,
 					array('user' => $user))[0][0];
 }
+
+function post_count($conn)
+{
+	$result = $conn->query('SELECT COUNT(id) FROM posts LIMIT 1');
+	return $result->fetchAll()[0][0];
+}
+

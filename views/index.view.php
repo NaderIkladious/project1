@@ -11,4 +11,13 @@
 		</p>
 		<div class="post-body"><?= $item['body'];?></div>
 	</article>
-<?php endforeach; ?>	
+<?php endforeach; ?>
+
+
+	<ul id="page">
+		<li><a <?php if($_GET['page'] <= 1){ echo 'style="pointer-events:none;"' ;} ?> href="index.php?page=<?=$_GET['page'] - 1 ;?>">Previous</a></li>
+<?php for ($i=1; $i <= $pageCount; $i++) :  ?>
+		<li><a href="index.php?page=<?=$i?>"><?=$i?></a></li>
+<?php endfor; ?>
+		<li><a <?php if($_GET['page'] >= $pageCount){ echo 'style="pointer-events:none;"' ;} ?> href="index.php?page=<?=$_GET['page'] + 1 ;?>">Next</a></li>
+	</ul>

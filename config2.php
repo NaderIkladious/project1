@@ -5,6 +5,7 @@
 		font-size: 20px;
 		border: none;
 		padding: 0;
+		margin-top: 42px;
 		background: transparent;
 		outline:none;
 		display: inline-block;
