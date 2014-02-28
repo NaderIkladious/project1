@@ -1,3 +1,4 @@
+<?php if($posts) : ?>
 <?php foreach ($posts as $item) : ?>
 	
 	<article>
@@ -17,7 +18,10 @@
 	<ul id="page">
 		<li><a <?php if($_GET['page'] <= 1){ echo 'style="pointer-events:none;"' ;} ?> href="index.php?page=<?=$_GET['page'] - 1 ;?>">Previous</a></li>
 <?php for ($i=1; $i <= $pageCount; $i++) :  ?>
-		<li><a href="index.php?page=<?=$i?>"><?=$i?></a></li>
+		<li><a href="?<?php if(isset($_GET['id'])) {echo "id=" . $_GET['id'] . "&"; } ?>page=<?=$i?>"><?=$i?></a></li>
 <?php endfor; ?>
 		<li><a <?php if($_GET['page'] >= $pageCount){ echo 'style="pointer-events:none;"' ;} ?> href="index.php?page=<?=$_GET['page'] + 1 ;?>">Next</a></li>
 	</ul>
+<? else : ?>
+	<p>NO POSTS YET!</p>
+<? endif ; ?>

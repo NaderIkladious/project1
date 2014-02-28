@@ -645,7 +645,8 @@ tr.eventr td {
 }
 
 div.pass {
-	position: relative;
+	position: absolute;
+	top: 460px;
 	width: 258px;
 	clear: both;
 	background-color: rgba(0,0,0 ,0.5);
@@ -678,7 +679,7 @@ div.pass {
 	background: #5c8a97;
 	margin: 100px;
 	display: inline-block;
-	height: 50px;
+	/*height: 50px;*/
 	overflow: hidden;
 	border-radius: 5px;
 	
@@ -692,6 +693,7 @@ div.pass {
 	display: inline-block;
 	position: relative;
 	bottom: -11px;
+	margin-bottom: 23px;
 }
 
 #page li:first-child {margin: 0}

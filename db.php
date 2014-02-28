@@ -19,13 +19,13 @@ function connect($config)
 	}
 }
 
-function get( $tableName, $conn, $col ="*",$order ="", $limit = 10, $max = null)
+function get( $tableName, $conn, $col ="*", $where="", $order ="", $limit = 10, $max = null)
 {	
 	try {
 		if ($max === null){
-			$result = $conn->query("SELECT $col FROM $tableName $order LIMIT $limit");
+			$result = $conn->query("SELECT $col FROM $tableName $where $order LIMIT $limit");
 		}else {
-			$result = $conn->query("SELECT $col FROM $tableName $order LIMIT $limit , $max");
+			$result = $conn->query("SELECT $col FROM $tableName $where $order LIMIT $limit , $max");
 		}
 		return ($result->rowCount() > 0)
 		? $result
@@ -238,13 +238,13 @@ function change_bio($new, $id, $conn)
 	}
 }
 
-function user_posts($id, $conn)
-{
-	return query("SELECT * FROM posts WHERE author_id = :id ORDER BY id DESC",
-				 $conn,
-				 array('id' => $id));
+// function user_posts($id, $conn)
+// {
+// 	return query("SELECT * FROM posts WHERE author_id = :id ORDER BY id DESC",
+// 				 $conn,
+// 				 array('id' => $id));
 
-}
+// }
 
 // function new_comment($comment, $conn)
 // {
@@ -307,9 +307,9 @@ function is_admin($user, $conn)
 					array('user' => $user))[0][0];
 }
 
-function post_count($conn)
+function post_count( $conn, $where = "")
 {
-	$result = $conn->query('SELECT COUNT(id) FROM posts LIMIT 1');
+	$result = $conn->query("SELECT COUNT(id) FROM posts $where LIMIT 1");
 	return $result->fetchAll()[0][0];
 }
 

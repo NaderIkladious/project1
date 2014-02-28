@@ -2,7 +2,7 @@
 
 require '../blog.php';
 session_start();
-$all = get('posts', $conn);
+$all = get('posts', $conn, "*", "", "ORDER BY id DESC");
 $users = all_users($conn);
 
 if( isset($_POST['delete'])) {
@@ -21,6 +21,6 @@ if( isset($_POST['mkAdmin'])) {
 	echo $Scroll_Pos;
 }
 
-$path = '../views/admin/users.view.php';
+$path = '../views/admin/posts.view.php';
 require '../views/admin/admin.tmpl.php';
 
